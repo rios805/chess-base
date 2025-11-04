@@ -1,6 +1,8 @@
 #include "Chess.h"
 #include <limits>
 #include <cmath>
+#include <sstream>
+#include <cctype>
 
 Chess::Chess()
 {
@@ -36,6 +38,8 @@ Bit* Chess::PieceForPlayer(const int playerNumber, ChessPiece piece)
     bit->setOwner(getPlayerAt(playerNumber));
     bit->setSize(pieceSize, pieceSize);
 
+    bit->setGameTag((playerNumber == 0 ? 0 : 128) + piece); //set gameTag for pieceNotation()
+
     return bit;
 }
 
@@ -51,8 +55,40 @@ void Chess::setUpBoard()
     startGame();
 }
 
-void Chess::FENtoBoard(const std::string& fen) {
+void Chess::FENtoBoard(const std::string& fen) 
+{
     // convert a FEN string to a board
+    // Split the FEN string by spaces
+    std::istringstream iss(fen);
+    std::string boardTok; iss >> boardTok;
+
+    _grid->forEachSquare([](ChessSquare* s, int, int){ s->destroyBit(); });
+
+    int row = 7, col = 0;
+    for (char ch : boardTok) {
+        if (ch == '/') { row--; col = 0; continue; }
+        if (std::isdigit(static_cast<unsigned char>(ch))) { col += ch - '0'; continue; }
+
+        int player = std::isupper(static_cast<unsigned char>(ch)) ? 0 : 1;
+        ChessPiece pt = NoPiece;
+        switch (std::tolower(static_cast<unsigned char>(ch))) {
+            case 'p': pt=Pawn; break; case 'n': pt=Knight; break;
+            case 'b': pt=Bishop; break; case 'r': pt=Rook; break;
+            case 'q': pt=Queen; break; case 'k': pt=King; break;
+        }
+
+        auto* sq  = _grid->getSquare(col, row);
+        auto* bit = PieceForPlayer(player, pt);
+
+        sq->destroyBit();
+
+        // Attach and move sprite to the center
+        sq->setBit(bit);
+        bit->setParent(sq);
+        bit->moveTo(sq->getPosition());
+
+        col++;
+    }
     // FEN is a space delimited string with 6 fields
     // 1: piece placement (from white's perspective)
     // NOT PART OF THIS ASSIGNMENT BUT OTHER THINGS THAT CAN BE IN A FEN STRING

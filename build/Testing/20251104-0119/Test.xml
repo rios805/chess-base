@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Win32-MSBuild"
+	BuildStamp="20251104-0119-Experimental"
+	Name="RiosG14"
+	Generator="ctest-4.1.0"
+	CompilerName="C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe"
+	CompilerVersion="19.44.35215.0"
+	OSName="Windows"
+	Hostname="RiosG14"
+	OSRelease=" Personal"
+	OSVersion=" (Build 26100)"
+	OSPlatform="AMD64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="15"
+	ModelID="4"
+	ModelName="AMD Ryzen 9 7940HS w/ Radeon 780M Graphics"
+	ProcessorCacheSize="64"
+	NumberOfLogicalCPU="16"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="24283"
+	TotalPhysicalMemory="15579"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="4001"
+	>
+	<Testing>
+		<StartDateTime>Nov 03 17:57 Pacific Standard Time</StartDateTime>
+		<StartTestTime>1762221429</StartTestTime>
+		<TestList/>
+		<EndDateTime>Nov 03 17:57 Pacific Standard Time</EndDateTime>
+		<EndTestTime>1762221429</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>
